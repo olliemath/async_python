@@ -1,0 +1,3 @@
+# Gunicorn Worker Benchmarks
+
+A simple API container for use benchmarking [gunicorn](https://gunicorn.org/) workers with a standard [Flask](http://flask.pocoo.org/) + [SQLAlchemy](https://www.sqlalchemy.org/) app. We are deliberately careful not to write a lightning-fast, unrealistic, bare-bones app. Thus we choose an example which is mostly identical to the SQLAlcehmy object-relational [tutorial](https://docs.sqlalchemy.org/en/latest/orm/tutorial.html) only we replaced users and posts with authors and books. We marshal arguments and return values using [Marshmallow](https://marshmallow.readthedocs.io/en/3.0/).
