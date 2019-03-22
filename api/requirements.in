@@ -11,7 +11,7 @@ marshmallow
 marshmallow-enum
 pg8000
 psycogreen
-psycopg2  # cpython only
-# psycopg2cffi  # pypy only
+# psycopg2  # cpython only
+psycopg2cffi  # pypy only
 requests
 sqlalchemy-utils

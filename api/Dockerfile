@@ -1,5 +1,5 @@
-FROM python:2
-# FROM pypy:2-6.0.0
+# FROM python:2
+FROM pypy:2-6.0.0
 
 COPY gunicorn.conf.py /
 COPY run.sh /
