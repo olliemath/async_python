@@ -1,0 +1,6 @@
+iso3166
+marshmallow_enum
+marshmallow
+sanic
+sqlalchemy-utils
+tortoise-orm[asyncpg]
