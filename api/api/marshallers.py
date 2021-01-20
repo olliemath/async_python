@@ -32,7 +32,6 @@ class Author(Schema):
 
 
 class Book(Schema):
-    # For viewing when attached to a given author
     id = fields.Str(dump_only=True)
     title = fields.Str(required=True)
     author_id = fields.Str(required=True)

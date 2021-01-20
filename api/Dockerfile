@@ -1,18 +1,10 @@
-FROM pypy:3-7.0.0
-# Or, to build the CPython version:
-# FROM python:3.6
+FROM pypy:3-7.3.3
 
-RUN useradd -m --uid 1000 api
-COPY run.sh requirements.txt gunicorn_entrypoint.py /home/api/
+COPY run.sh requirements.txt gunicorn_entrypoint.py migrate.py /home/api/
+RUN pip install -r /home/api/requirements.txt
+RUN apt update && apt install -y python3-pip && python3 -m pip install -r /home/api/requirements.txt
+
 COPY api/ /home/api/api/
-RUN chown -R api:api /home/api
-
 WORKDIR /home/api/
-USER api
-
-ENV PATH=/home/api/.local/bin:$PATH \
-    PYTHONPATH=/home/api/.local/lib/python2.7/site-packages/:$PYTHONPATH
-
-RUN pip install --user -r /home/api/requirements.txt
 
 ENTRYPOINT ["/home/api/run.sh"]

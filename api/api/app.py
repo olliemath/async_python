@@ -10,11 +10,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 if DB_CONNECTOR == "psycopg":
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgresql+psycopg2://postgres:password@db/postgres"
+    ] = "postgresql+psycopg2://postgres:password@test-db/postgres"
 else:
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "postgresql+pg8000://postgres:password@db/postgres"
+    ] = "postgresql+pg8000://postgres:password@test-db/postgres"
 
 
 db.init_app(app)

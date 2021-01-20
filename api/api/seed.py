@@ -79,3 +79,7 @@ def seed_enums(session):
 
         session.add_all(statuses + codes)
         session.commit()
+
+
+def is_seeded(session):
+    return session.query(Author).count()

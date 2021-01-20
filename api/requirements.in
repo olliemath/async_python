@@ -10,7 +10,7 @@ marshmallow
 marshmallow-enum
 pg8000
 psycogreen
-# psycopg2  # cpython only
-psycopg2cffi  # pypy only
+psycopg2 ; python_version >= '3.8' # CPython only
+psycopg2cffi ; python_version < '3.7'  # PyPy only
 requests
 sqlalchemy-utils

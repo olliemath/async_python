@@ -1,17 +1,17 @@
 """
 A simple migration script in liue of the need for anything fancy like Alembic
 """
-from __future__ import absolute_import
-from psycopg2cffi import compat
+from api.patch import patch_db_conn
+patch_db_conn()
 
-compat.register()
+import sqlalchemy as sa  # noqa: E402
+from sqlalchemy.engine.url import make_url  # noqa: E402
+from sqlalchemy.orm import sessionmaker  # noqa: E402
 
-import sqlalchemy as sa  # noqa: F401
-from sqlalchemy.engine.url import make_url  # noqa: F401
-from sqlalchemy.orm import sessionmaker  # noqa: F401
-
-from api.app import app, db  # noqa: F401
-from api.seed import create_authors_and_books, seed_enums  # noqa: F401
+from api.app import app, db  # noqa: E402
+from api.seed import (  # noqa: E402
+    create_authors_and_books, is_seeded, seed_enums
+)
 
 
 uri = app.config["SQLALCHEMY_DATABASE_URI"]
@@ -23,4 +23,5 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 seed_enums(session)
-create_authors_and_books(session, 1000 * 1000)
+if not is_seeded(session):
+    create_authors_and_books(session, 1000 * 1000)

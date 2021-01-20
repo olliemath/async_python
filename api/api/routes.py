@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy.orm import joinedload
 
 from .extensions import db
 from .models import Author, Book
@@ -41,7 +42,7 @@ def author():
         limit = args["limit"]
         offset = args["offset"]
 
-        authors = Author.query.limit(limit).offset(offset).all() or []
+        authors = Author.query.limit(limit).offset(offset).all()
         return jsonify(marshallers.authors.dump(authors))
 
     if request.method == "POST":
@@ -67,7 +68,9 @@ def book():
         limit = args["limit"]
         offset = args["offset"]
 
-        books = Book.query.limit(limit).offset(offset).all() or []
+        books = Book.query.limit(limit).offset(offset).options(
+            joinedload("author")
+        ).all()
         return jsonify(marshallers.books.dump(books))
 
     if request.method == "POST":
